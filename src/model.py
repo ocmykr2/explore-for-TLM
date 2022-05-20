@@ -3,11 +3,16 @@ import torch
 from torch import nn
 from torch.nn import CrossEntropyLoss
 
+import os
+os.environ['TRANSFORMERS_CACHE'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache'
 from transformers import BertPreTrainedModel, BertModel
 from transformers.models.bert.modeling_bert import BertOnlyMLMHead
 from transformers.modeling_outputs import MaskedLMOutput
 from transformers.utils.dummy_pt_objects import NoRepeatNGramLogitsProcessor
 
+os.environ['TRANSFORMERS_CACHE'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache'
 logger = logging.getLogger(__name__)
 
 class BertForMaskedLM(BertPreTrainedModel):
