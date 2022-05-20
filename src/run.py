@@ -14,10 +14,13 @@
 # limitations under the License.
 # https://cloud.tsinghua.edu.cn/u/d/6113ab997d104aa38110/
 """ Finetuning a 🤗 Transformers model for sequence classification on GLUE."""
+import os
+os.environ['TRANSFORMERS_CACHE'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache'
 import argparse
 import logging
 import math
-import os, sys
+import sys
 import random
 import torch
 import datasets
@@ -375,8 +378,8 @@ def get_model(args, num_labels):
     #
     # In distributed training, the .from_pretrained methods guarantee that only one local process can concurrently
     # download model & vocab.
-    config = AutoConfig.from_pretrained(args.config_dir)
-    tokenizer = AutoTokenizer.from_pretrained(args.config_dir)
+    config = AutoConfig.from_pretrained(args.config_dir, cache_dir="/root/autodl-tmp/cache")
+    tokenizer = AutoTokenizer.from_pretrained(args.config_dir, cache_dir="/root/autodl-tmp/cache")
 
     if args.model_name_or_path and not args.from_scratch:
         set_cls = True if not args.from_scratch else False
@@ -385,7 +388,7 @@ def get_model(args, num_labels):
             from_tf=bool(".ckpt" in args.model_name_or_path),
             config=config,
             set_cls=set_cls,
-            num_labels=num_labels,
+            num_labels=num_labels, cache_dir="/root/autodl-tmp/cache"
         )
     else:
         model = BertForMaskedLM(config)
@@ -436,7 +439,7 @@ def main():
     args = parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = args.cuda_devices
     os.environ['NVIDIA_VISIBLE_DEVICES'] = args.cuda_devices
-    
+    os.environ['TRANSFORMERS_CACHE'] = '/blabla/cache/'
     # Initialize the accelerator. We will let the accelerator handle device placement for us in this example.
     accelerator = Accelerator()
     args.device = accelerator.device
