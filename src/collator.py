@@ -4,9 +4,12 @@ from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, NewType, Optional, Tuple, Union
 
 import torch
-
+import os
+os.environ['TRANSFORMERS_CACHE'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache'
 from transformers.tokenization_utils_base import BatchEncoding, PreTrainedTokenizerBase
-
+os.environ['TRANSFORMERS_CACHE'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache'
 @dataclass
 class DataCollatorForLanguageModeling:
 
