@@ -1,5 +1,5 @@
 This is forked from Xingcheng Yao's github.
-To test my work, you can just follow the paper's hypergrams contact me.
+To test my work, you can just follow the paper's hypergrams or contact me.
 ## NLP From Scratch Without Large-Scale Pretraining
 This repository contains the code, pre-trained model checkpoints and collected datasets for our paper: [NLP From Scratch Without Large-Scale Pretraining: A Simple and Efficient Framework](https://arxiv.org/abs/2111.04130). 
 
